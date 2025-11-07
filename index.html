@@ -179,7 +179,17 @@
 			.contactElement {
 				display: flex;
 				align-items: center;
+				cursor: pointer;
 				gap: 12px;
+				padding: 4px;
+				transition: transform 0.2s, background-color 0.2s;
+			}
+			.contactElement:hover {
+				background-color: rgba(255, 255, 255, 0.2);
+				scale: calc(1.02);
+				padding: 4px;
+				border-radius: 5px;
+				transition: background-color 0.2s;
 			}
 			.contactIcon {
 				width: 40px;
@@ -231,9 +241,9 @@
 			<!-- Bio Container -->
 			<div class="bioContainer">
 				<p id="bioData">
-					Co-Founder & Director, NTRO Card Ltd, Bangladesh's 1st NFC Smart
+					Co-Founder & Director, WeFlo LTD, Bangladesh's 1st AR based Digital
 					Business Card helping people grow their business network by using
-					INTRO.
+					WeFlo.
 				</p>
 			</div>
 		</div>
