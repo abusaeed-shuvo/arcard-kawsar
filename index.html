@@ -28,8 +28,8 @@
 				height: 100%;
 				object-fit: cover;
 				z-index: -3;
+				pointer-events: none; /* prevents user interaction with the camera feed */
 			}
-
 			/* Dark overlay for contrast */
 			#overlay {
 				position: fixed;
@@ -60,7 +60,7 @@
 				padding: 15px;
 				width: 90%;
 				max-width: 500px;
-				margin: 20px 0;
+				margin: 0;
 			}
 
 			#profileImg {
@@ -84,19 +84,18 @@
 				margin: 2px 0;
 			}
 
-			/* Buttons */
 			.buttonContainer {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				width: 90%;
 				max-width: 500px;
-				margin: 10px 0;
+				margin-bottom: 30px;
 				padding: 10px;
+				gap: 10px; /* space between save button and social buttons */
 			}
-
 			#saveContact {
-				width: 120px;
+				width: auto;
 				height: 50px;
 				border-radius: 12px;
 				border: none;
@@ -113,11 +112,24 @@
 				background-color: rgba(255, 255, 255, 0.3);
 			}
 
+			/* Social buttons scrollable */
 			.socialButtonContainer {
 				display: flex;
 				flex-direction: row;
-				justify-content: center;
-				gap: 15px;
+				gap: 10px;
+				padding: 5px;
+				overflow-x: auto; /* horizontal scroll if buttons exceed container width */
+				-webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+			}
+			.socialButtonContainer::-webkit-scrollbar {
+				height: 6px;
+			}
+			.socialButtonContainer::-webkit-scrollbar-thumb {
+				background: rgba(255, 255, 255, 0.3);
+				border-radius: 3px;
+			}
+			.socialButtonContainer::-webkit-scrollbar-track {
+				background: transparent;
 			}
 			.socialButton {
 				width: 50px;
@@ -134,48 +146,50 @@
 				background-color: rgba(255, 255, 255, 0.3);
 			}
 
-			/* Bio */
+			/* Bio Container */
 			.bioContainer {
 				width: 90%;
 				max-width: 500px;
-				padding: 15px;
-				margin: 10px 0;
-				border-radius: 16px;
-				border: 1px solid rgba(255, 255, 255, 0.3);
-				background-color: rgba(255, 255, 255, 0.25);
-				backdrop-filter: blur(15px);
-				text-align: center;
-				line-height: 1.4;
-			}
+				padding: 15px 15px;
 
-			/* Contact Info */
-			.contactContainer {
-				width: 90%;
-				max-width: 500px;
-				padding: 15px;
-				margin: 10px 0 30px;
+				border-radius: 16px;
+
+				line-height: 1.4;
+				text-align: left; /* align text like buttons and contacts */
 				display: flex;
 				flex-direction: column;
 				gap: 10px;
+			}
+
+			/* Contact Container */
+			.contactContainer {
+				width: 90%;
+				max-width: 500px;
+				padding: 15px 20px;
+				margin: 10px 0;
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
 				border-radius: 16px;
 				border: 1px solid rgba(255, 255, 255, 0.3);
 				background-color: rgba(255, 255, 255, 0.25);
 				backdrop-filter: blur(15px);
 			}
-
+			/* Contact Elements */
 			.contactElement {
 				display: flex;
 				align-items: center;
-				gap: 10px;
+				gap: 12px;
 			}
 			.contactIcon {
 				width: 40px;
 				height: 40px;
+				flex-shrink: 0;
 			}
-
 			.contactDetails {
 				margin: 0;
-				word-break: break-all;
+				word-break: break-word;
+				font-size: 0.95rem;
 			}
 
 			/* Mobile layout */
@@ -200,35 +214,28 @@
 		<div id="overlay"></div>
 
 		<!-- Profile Card -->
-		<div class="profileContainer glassCard">
-			<img
-				id="profileImg"
-				src="./img/profile.jpg"
-				alt="Kawsar Hossain profile picture"
-			/>
-			<div class="personalDetails">
-				<h1 id="name">Kawsar Hossain</h1>
-				<h5 id="occupation">Creative Manager</h5>
-				<h5 class="workPlace">WeFlo LTD</h5>
+		<div class="profileAndBioContainer glassCard">
+			<div class="profileContainer">
+				<img
+					id="profileImg"
+					src="./img/profile.jpg"
+					alt="Kawsar Hossain profile picture"
+				/>
+				<div class="personalDetails">
+					<h1 id="name">Kawsar Hossain</h1>
+					<h5 id="occupation">Creative Manager</h5>
+					<h5 class="workPlace">WeFlo LTD</h5>
+				</div>
 			</div>
-		</div>
 
-		<!-- Button Container -->
-		<div class="buttonContainer glassCard">
-			<button id="saveContact">Save Contact</button>
-			<div class="socialButtonContainer">
-				<img src="./icons/linkedin.png" alt="LinkedIn" class="socialButton" />
-				<img src="./icons/instagram.png" alt="Instagram" class="socialButton" />
-				<img src="./icons/facebook.png" alt="Facebook" class="socialButton" />
+			<!-- Bio Container -->
+			<div class="bioContainer">
+				<p id="bioData">
+					Co-Founder & Director, NTRO Card Ltd, Bangladesh's 1st NFC Smart
+					Business Card helping people grow their business network by using
+					INTRO.
+				</p>
 			</div>
-		</div>
-
-		<!-- Bio Container -->
-		<div class="bioContainer glassCard">
-			<p id="bioData">
-				Co-Founder & Director, NTRO Card Ltd, Bangladesh's 1st NFC Smart
-				Business Card helping people grow their business network by using INTRO.
-			</p>
 		</div>
 
 		<!-- Contact Container -->
@@ -241,8 +248,25 @@
 				<img src="./icons/phone.png" alt="Call Me" class="contactIcon" />
 				<p class="contactDetails">+8801234567890</p>
 			</div>
+			<div class="contactElement">
+				<img src="./icons/whatsapp.png" alt="whatsapp Me" class="contactIcon" />
+				<p class="contactDetails">wa.me/+8801234567890</p>
+			</div>
+			<div class="contactElement">
+				<img src="./icons/location.png" alt="Visit Me" class="contactIcon" />
+				<p class="contactDetails">Abc city</p>
+			</div>
 		</div>
-
+		<!-- Button Container -->
+		<div class="buttonContainer glassCard">
+			<div class="socialButtonContainer">
+				<img src="./icons/linkedin.png" alt="LinkedIn" class="socialButton" />
+				<img src="./icons/instagram.png" alt="Instagram" class="socialButton" />
+				<img src="./icons/facebook.png" alt="Facebook" class="socialButton" />
+				<img src="./icons/web.png" alt="Website" class="socialButton" />
+			</div>
+			<img src="./icons/contact.png" alt="Save Contact" id="saveContact" />
+		</div>
 		<script>
 			const video = document.getElementById("cameraFeed");
 			navigator.mediaDevices
