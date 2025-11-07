@@ -84,8 +84,8 @@
 				justify-content: center;
 			}
 
-			h1 {
-				margin: -7px;
+			h2 {
+				margin: 0;
 			}
 			h5 {
 				margin: 2px;
@@ -106,6 +106,7 @@
 				height: 50px;
 				border-radius: 12px;
 				border: none;
+				padding: 7px;
 				background-color: rgba(255, 255, 255, 0.2);
 				backdrop-filter: blur(10px);
 				color: #fff;
@@ -172,14 +173,12 @@
 			.contactContainer {
 				width: 90%;
 				max-width: 500px;
-				padding: 15px 15px;
+
 				margin: 10px 0;
 				display: flex;
 				flex-direction: column;
 				gap: 12px;
-				border-radius: 16px;
-				border: 1px solid rgba(255, 255, 255, 0.3);
-				background-color: rgba(255, 255, 255, 0.25);
+
 				backdrop-filter: blur(15px);
 			}
 			/* Contact Elements */
@@ -188,6 +187,10 @@
 				align-items: center;
 				cursor: pointer;
 				gap: 12px;
+				color: #fff;
+				border-radius: 16px;
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				background-color: rgba(255, 255, 255, 0.25);
 				padding: 4px;
 				transition: transform 0.2s, background-color 0.2s;
 			}
@@ -195,7 +198,7 @@
 				background-color: rgba(255, 255, 255, 0.2);
 				scale: calc(1.02);
 				padding: 4px;
-				border-radius: 5px;
+				border-radius: 10px;
 				transition: background-color 0.2s;
 			}
 			.contactIcon {
@@ -212,13 +215,14 @@
 			/* Mobile layout */
 			@media (max-width: 480px) {
 				.profileContainer {
-					flex-direction: column;
-					text-align: center;
+					flex-direction: row;
+					text-align: start;
+					gap: 5px;
 				}
 
 				#profileImg {
-					width: 100%;
-					height: 200px;
+					width: 150px;
+					height: 150px;
 					border-radius: 16px 16px 0 0;
 					margin-right: 0;
 				}
@@ -239,9 +243,8 @@
 				alt="Kawsar Hossain profile picture"
 			/>
 			<div class="personalDetails">
-				<h1 id="name">Kawsar</h1>
-				<h1 id="lastname">Hossain</h1>
-				<h5 id="occupation">Creative Manager</h5>
+				<h2 id="name">Kawsar Hossain</h2>
+				<h5 id="occupation">Meta Marketer</h5>
 				<h5 class="workPlace">WeFlo LTD</h5>
 			</div>
 		</div>
@@ -249,37 +252,37 @@
 		<!-- Bio Container -->
 		<div class="bioContainer glassCard">
 			<p id="bioData">
-				Co-Founder & Director, WeFlo LTD, Bangladesh's 1st AR based Digital
-				Business Card helping people grow their business network by using WeFlo.
+				Digital marketer with 1 year of experience specializing in Meta
+				marketing.
 			</p>
 		</div>
 
 		<!-- Contact Container -->
-		<div class="contactContainer glassCard">
+		<div class="contactContainer">
 			<div class="contactElement">
 				<img src="./icons/email.png" alt="Email Me" class="contactIcon" />
-				<p class="contactDetails">support@weflow.com</p>
+				<p class="contactDetails">kawsarbapare50@gmail.com</p>
 			</div>
 			<div class="contactElement">
 				<img src="./icons/phone.png" alt="Call Me" class="contactIcon" />
-				<p class="contactDetails">+8801234567890</p>
+				<p class="contactDetails">+8801618893588</p>
 			</div>
 			<div class="contactElement">
 				<img src="./icons/whatsapp.png" alt="whatsapp Me" class="contactIcon" />
-				<p class="contactDetails">wa.me/+8801234567890</p>
+				<p class="contactDetails">wa.me/+8801618893588</p>
 			</div>
 			<div class="contactElement">
 				<img src="./icons/location.png" alt="Visit Me" class="contactIcon" />
-				<p class="contactDetails">Abc city</p>
+				<p class="contactDetails">Dhaka, Bangladesh</p>
 			</div>
 		</div>
 		<!-- Button Container -->
-		<div class="buttonContainer glassCard">
+		<div class="buttonContainer">
 			<div class="socialButtonContainer">
 				<img src="./icons/linkedin.png" alt="LinkedIn" class="socialButton" />
 				<img src="./icons/instagram.png" alt="Instagram" class="socialButton" />
 				<img src="./icons/facebook.png" alt="Facebook" class="socialButton" />
-				<img src="./icons/web.png" alt="Website" class="socialButton" />
+				<img src="./icons/behance.png" alt="Website" class="socialButton" />
 			</div>
 			<img src="./icons/contact.png" alt="Save Contact" id="saveContact" />
 		</div>
