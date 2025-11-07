@@ -4,6 +4,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Kawsar Hossain</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
 			body {
 				font-family: Arial, sans-serif;
@@ -14,6 +20,7 @@
 				align-items: center;
 				justify-content: flex-start;
 				height: 100vh;
+				font-family: "Montserrat", sans-serif;
 				overflow-y: scroll;
 				position: relative;
 				background: #000;
@@ -78,10 +85,10 @@
 			}
 
 			h1 {
-				margin: 10px 0;
+				margin: -7px;
 			}
 			h5 {
-				margin: 2px 0;
+				margin: 2px;
 			}
 
 			.buttonContainer {
@@ -104,7 +111,7 @@
 				color: #fff;
 				font-weight: bold;
 				cursor: pointer;
-				margin-bottom: 15px;
+
 				transition: transform 0.2s, background-color 0.2s;
 			}
 			#saveContact:hover {
@@ -151,7 +158,7 @@
 				width: 90%;
 				max-width: 500px;
 				padding: 15px 15px;
-
+				margin-top: 10px;
 				border-radius: 16px;
 
 				line-height: 1.4;
@@ -224,28 +231,27 @@
 		<div id="overlay"></div>
 
 		<!-- Profile Card -->
-		<div class="profileAndBioContainer glassCard">
-			<div class="profileContainer">
-				<img
-					id="profileImg"
-					src="./img/profile.jpg"
-					alt="Kawsar Hossain profile picture"
-				/>
-				<div class="personalDetails">
-					<h1 id="name">Kawsar Hossain</h1>
-					<h5 id="occupation">Creative Manager</h5>
-					<h5 class="workPlace">WeFlo LTD</h5>
-				</div>
-			</div>
 
-			<!-- Bio Container -->
-			<div class="bioContainer">
-				<p id="bioData">
-					Co-Founder & Director, WeFlo LTD, Bangladesh's 1st AR based Digital
-					Business Card helping people grow their business network by using
-					WeFlo.
-				</p>
+		<div class="profileContainer glassCard">
+			<img
+				id="profileImg"
+				src="./img/profile.jpg"
+				alt="Kawsar Hossain profile picture"
+			/>
+			<div class="personalDetails">
+				<h1 id="name">Kawsar</h1>
+				<h1 id="lastname">Hossain</h1>
+				<h5 id="occupation">Creative Manager</h5>
+				<h5 class="workPlace">WeFlo LTD</h5>
 			</div>
+		</div>
+
+		<!-- Bio Container -->
+		<div class="bioContainer glassCard">
+			<p id="bioData">
+				Co-Founder & Director, WeFlo LTD, Bangladesh's 1st AR based Digital
+				Business Card helping people grow their business network by using WeFlo.
+			</p>
 		</div>
 
 		<!-- Contact Container -->
