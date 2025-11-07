@@ -98,7 +98,7 @@
 				width: 90%;
 				max-width: 500px;
 				margin-bottom: 30px;
-				padding: 15px;
+				padding: 0px 15px 15px 15px;
 				gap: 10px; /* space between save button and social buttons */
 			}
 			#saveContact {
@@ -168,6 +168,10 @@
 				flex-direction: column;
 				gap: 10px;
 			}
+			#bioData {
+				margin: 0;
+				font-size: 0.95rem;
+			}
 
 			/* Contact Container */
 			.contactContainer {
@@ -224,7 +228,6 @@
 					width: 150px;
 					height: 150px;
 					border-radius: 16px 16px 0 0;
-					margin-right: 0;
 				}
 			}
 		</style>
@@ -245,15 +248,16 @@
 			<div class="personalDetails">
 				<h2 id="name">Kawsar Hossain</h2>
 				<h5 id="occupation">Meta Marketer</h5>
-				<h5 class="workPlace">WeFlo LTD</h5>
+				<h5 id="workPlace">WeFlo LTD</h5>
 			</div>
 		</div>
 
 		<!-- Bio Container -->
 		<div class="bioContainer glassCard">
 			<p id="bioData">
-				Digital marketer with 1 year of experience specializing in Meta
-				marketing.
+				Social Media Strategist ✨ | Turning clicks into conversions with
+				engaging content and targeted campaigns. 🎯 Let's build your brand's
+				online presence together. 🤝
 			</p>
 		</div>
 
