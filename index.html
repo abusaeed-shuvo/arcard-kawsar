@@ -16,197 +16,62 @@
 				line-height: 1.6;
 			}
 
-			/* --- Mobile-first: image on top, horizontal arch at bottom --- */
-			#profileImg {
-				width: 100%;
-				height: 40vh;
-				object-fit: cover;
-				object-position: center;
-
-				/* Horizontal arch along bottom (lengthwise) */
-				clip-path: polygon(
-					0 0,
-					100% 0,
-					100% 80%,
-					/* bottom edges start */ 50% 85%,
-					/* peak of arch */ 0 80%
-				);
-			}
-
-			/* Content */
-			.content {
-				width: 90%;
-				max-width: 500px;
-				text-align: center;
-			}
-
-			.nameContainer h1 {
-				margin: 10px 0 0 0;
-				font-size: 2em;
-			}
-			.nameContainer h2 {
-				margin: 5px 0;
-				font-size: 1.2em;
-				color: #555;
-			}
-
-			.detailContainer p {
-				margin: 5px 0;
-			}
-
-			.socialLinkContainer {
+			.profileContainer {
 				display: flex;
-				flex-direction: column;
+				flex-direction: row;
 				align-items: center;
-				gap: 10px;
-				margin: 15px 0 25px 0;
-				width: 100%;
+				background-color: #fff;
+				max-width: 500px;
+				padding: 0;
+				margin-top: 10px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+				border-radius: 8px;
+				overflow: hidden; /* Ensures the image corners follow the card’s radius */
 			}
 
-			.socialIconContainer {
+			#profileImg {
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+
+				object-position: center;
+				border-top-left-radius: 8px;
+				border-bottom-left-radius: 8px;
+				margin: 0; /* Remove spacing to align perfectly with container */
+				display: block;
+			}
+
+			.personalDetails {
 				display: flex;
+				padding: 10px 15px;
+				flex-direction: column;
 				justify-content: center;
-				gap: 15px;
 			}
 
-			.social-icon {
-				width: 40px;
-				height: 40px;
-				cursor: pointer;
+			.personalDetails h4 {
+				margin: 0 0 3px 0;
+				font-size: 1.2em;
 			}
 
-			#addToContact {
-				width: auto;
-				height: 50px;
-				cursor: pointer;
-			}
-
-			/* --- Desktop layout: image on left, vertical arch on right --- */
-			@media (min-width: 600px) {
-				body {
-					flex-direction: row;
-					height: 100vh;
-					align-items: stretch;
-					justify-content: flex-start;
-				}
-
-				#profileImg {
-					width: 50vw;
-					height: 100%;
-					object-fit: cover;
-
-					/* Vertical arch along right edge (widthwise) */
-					clip-path: polygon(
-						0 0,
-						100% 0,
-						100% 50%,
-						/* mid right edge is arch peak */ 100% 100%,
-						0 100%
-					);
-				}
-
-				.content {
-					width: 50vw;
-					max-width: none;
-					padding: 40px;
-					text-align: left;
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-				}
-
-				.nameContainer h1 {
-					font-size: 3em;
-				}
-				.nameContainer h2 {
-					font-size: 1.5em;
-				}
-
-				.socialLinkContainer {
-					flex-direction: column;
-					align-items: flex-start;
-					gap: 15px;
-				}
-
-				.socialIconContainer {
-					justify-content: flex-start;
-				}
+			.personalDetails h5 {
+				margin: 1px 0;
+				font-size: 0.95em;
+				color: #555;
+				font-weight: normal;
 			}
 		</style>
 	</head>
 	<body>
-		<img
-			id="profileImg"
-			src="./img/profile.jpg"
-			alt="Kawsar Hossain profile picture"
-		/>
-
-		<div class="content">
-			<div class="nameContainer">
-				<h1>Kawsar Hossain</h1>
-				<h2>Creative manager</h2>
-			</div>
-
-			<div class="detailContainer">
-				<p>Location: Dhaka, Bangladesh</p>
-				<p>Email: kawsar.hossain@example.com</p>
-				<p>Phone: +880 1234 567890</p>
-				<p>Website/Portfolio: www.kawsgfx.com</p>
-			</div>
-
-			<div class="socialLinkContainer">
-				<!-- Row 1: Contact info -->
-				<div class="socialIconContainer">
-					<img
-						id="phoneNum"
-						src="./icons/phone.png"
-						alt="Call Kawsar"
-						class="social-icon"
-					/>
-					<img
-						id="email"
-						src="./icons/email.png"
-						alt="Email Kawsar"
-						class="social-icon"
-					/>
-					<img
-						id="linkedin"
-						src="./icons/linkedin.png"
-						alt="LinkedIn profile"
-						class="social-icon"
-					/>
-				</div>
-
-				<!-- Row 2: Social media -->
-				<div class="socialIconContainer">
-					<img
-						id="facebook"
-						src="./icons/facebook.png"
-						alt="Facebook profile"
-						class="social-icon"
-					/>
-					<img
-						id="instagram"
-						src="./icons/instagram.png"
-						alt="Instagram profile"
-						class="social-icon"
-					/>
-					<img
-						id="behance"
-						src="./icons/behance.png"
-						alt="Behance profile"
-						class="social-icon"
-					/>
-				</div>
-
-				<!-- Row 3: Add to contact -->
-				<div class="socialIconContainer">
-					<img
-						id="addToContact"
-						src="./icons/contact.png"
-						alt="Add to contacts"
-					/>
-				</div>
+		<div class="profileContainer">
+			<img
+				id="profileImg"
+				src="./img/profile.jpg"
+				alt="Kawsar Hossain profile picture"
+			/>
+			<div class="personalDetails">
+				<h4 id="name">Kawsar Hossain</h4>
+				<h5 id="occupation">Creative Manager</h5>
+				<h5 class="workPlace">WeFlo LTD</h5>
 			</div>
 		</div>
 	</body>
