@@ -9,70 +9,131 @@
 				font-family: Arial, sans-serif;
 				margin: 0;
 				padding: 0;
-				background-color: #f9f9f9;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				line-height: 1.6;
+				justify-content: center;
+				height: 100vh;
+				overflow: hidden;
+				position: relative;
 			}
 
+			/* Camera background */
+			#cameraFeed {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				z-index: -2;
+			}
+
+			/* Glassmorphic container */
 			.profileContainer {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				background-color: #fff;
+				backdrop-filter: blur(15px) saturate(150%);
+				-webkit-backdrop-filter: blur(15px) saturate(150%);
+				background-color: rgba(255, 255, 255, 0.25);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				border-radius: 16px;
+				box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+				padding: 15px;
+				width: 90%;
 				max-width: 500px;
-				padding: 0;
-				margin-top: 10px;
-				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-				border-radius: 8px;
-				overflow: hidden; /* Ensures the image corners follow the card’s radius */
+				transition: color 0.3s ease, background-color 0.3s ease;
 			}
 
 			#profileImg {
 				width: 150px;
 				height: 150px;
+				border-radius: 12px;
 				object-fit: cover;
-
-				object-position: center;
-				border-top-left-radius: 8px;
-				border-bottom-left-radius: 8px;
-				margin: 0; /* Remove spacing to align perfectly with container */
-				display: block;
+				margin-right: 20px;
 			}
 
 			.personalDetails {
 				display: flex;
-				padding: 10px 15px;
 				flex-direction: column;
 				justify-content: center;
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+				transition: color 0.3s ease;
 			}
 
-			.personalDetails h4 {
-				margin: 0 0 3px 0;
-				font-size: 1.2em;
-			}
-
-			.personalDetails h5 {
-				margin: 1px 0;
-				font-size: 0.95em;
-				color: #555;
-				font-weight: normal;
+			h4,
+			h5 {
+				margin: 2px 0;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="profileContainer">
+		<!-- Camera background -->
+		<video id="cameraFeed" autoplay playsinline muted></video>
+
+		<!-- Profile Card -->
+		<div class="profileContainer" id="profileCard">
 			<img
 				id="profileImg"
 				src="./img/profile.jpg"
 				alt="Kawsar Hossain profile picture"
 			/>
-			<div class="personalDetails">
+			<div class="personalDetails" id="personalDetails">
 				<h4 id="name">Kawsar Hossain</h4>
 				<h5 id="occupation">Creative Manager</h5>
 				<h5 class="workPlace">WeFlo LTD</h5>
 			</div>
 		</div>
+
+		<canvas
+			id="brightnessCanvas"
+			width="64"
+			height="64"
+			style="display: none"
+		></canvas>
+
+		<script>
+			const video = document.getElementById("cameraFeed");
+			const profileCard = document.getElementById("profileCard");
+			const personalDetails = document.getElementById("personalDetails");
+			const canvas = document.getElementById("brightnessCanvas");
+			const ctx = canvas.getContext("2d");
+
+			// Access camera
+			navigator.mediaDevices
+				.getUserMedia({ video: { facingMode: "environment" } })
+				.then((stream) => {
+					video.srcObject = stream;
+					checkBrightness();
+				})
+				.catch((err) => console.error("Camera access denied:", err));
+
+			function checkBrightness() {
+				if (video.readyState === video.HAVE_ENOUGH_DATA) {
+					ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+					const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+					let sum = 0;
+					for (let i = 0; i < frame.data.length; i += 4) {
+						const r = frame.data[i];
+						const g = frame.data[i + 1];
+						const b = frame.data[i + 2];
+						const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+						sum += brightness;
+					}
+					const avg = sum / (frame.data.length / 4);
+
+					// Toggle text color
+					if (avg > 127) {
+						personalDetails.style.color = "#000";
+						profileCard.style.color = "#000";
+					} else {
+						personalDetails.style.color = "#fff";
+						profileCard.style.color = "#fff";
+					}
+				}
+				requestAnimationFrame(checkBrightness);
+			}
+		</script>
 	</body>
 </html>
