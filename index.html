@@ -7,26 +7,22 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
 			rel="stylesheet"
 		/>
 		<style>
 			body {
-				font-family: Arial, sans-serif;
 				margin: 0;
 				padding: 0;
 				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: flex-start;
+				justify-content: center;
+				align-items: flex-start;
 				height: 100vh;
-				font-family: "Montserrat", sans-serif;
-				overflow-y: scroll;
-				position: relative;
 				background: #000;
+				font-family: "Montserrat", sans-serif;
+				overflow-y: auto;
 			}
 
-			/* Camera background */
 			#cameraFeed {
 				position: fixed;
 				top: 0;
@@ -35,9 +31,8 @@
 				height: 100%;
 				object-fit: cover;
 				z-index: -3;
-				pointer-events: none; /* prevents user interaction with the camera feed */
+				pointer-events: none;
 			}
-			/* Dark overlay for contrast */
 			#overlay {
 				position: fixed;
 				top: 0;
@@ -48,108 +43,111 @@
 				z-index: -2;
 			}
 
-			/* Glass style for all cards */
+			/* Main container ensures consistent alignment and width */
+			.mainContainer {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+				max-width: 500px;
+				gap: 15px;
+				padding: 20px 0;
+			}
+
 			.glassCard {
+				width: 100%;
 				backdrop-filter: blur(15px) saturate(150%);
 				-webkit-backdrop-filter: blur(15px) saturate(150%);
-				background-color: rgba(255, 255, 255, 0.25);
+				background-color: rgba(0, 0, 0, 0.25);
 				border: 1px solid rgba(255, 255, 255, 0.3);
 				border-radius: 16px;
 				box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 				color: #fff;
 				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+				padding: 15px;
 			}
 
 			.profileContainer {
 				display: flex;
-				flex-direction: row;
 				align-items: center;
-				padding: 15px;
-				width: 90%;
-				max-width: 500px;
-				margin: 0;
+				gap: 15px;
 			}
 
 			#profileImg {
-				width: 150px;
-				height: 150px;
+				width: 130px;
+				height: 130px;
 				border-radius: 12px;
 				object-fit: cover;
-				margin-right: 20px;
 			}
 
-			.personalDetails {
+			.personalDetails h2 {
+				margin: 0;
+				font-size: 1.3rem;
+			}
+			.personalDetails h5 {
+				margin: 3px 0;
+				font-weight: 400;
+			}
+
+			.bioContainer p {
+				margin: 0;
+				line-height: 1.5;
+				font-size: 0.95rem;
+			}
+
+			.contactContainer {
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
+				gap: 12px;
+				width: 100%;
 			}
 
-			h2 {
-				margin: 0;
+			.contactElement {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 8px;
+				border-radius: 12px;
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				background-color: rgba(255, 255, 255, 0.15);
+				transition: transform 0.2s, background-color 0.2s;
 			}
-			h5 {
-				margin: 2px;
+			.contactElement:hover {
+				background-color: rgba(255, 255, 255, 0.25);
+				transform: scale(1.02);
 			}
-			#occupation {
-				margin-top: 5px;
+			.contactIcon {
+				width: 40px;
+				height: 40px;
+			}
+			.contactDetails {
+				font-size: 0.95rem;
+				word-break: break-word;
 			}
 
 			.buttonContainer {
+				width: 100%;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				width: 90%;
-				max-width: 500px;
-				margin-bottom: 30px;
-				padding: 0px 15px 15px 15px;
-				gap: 10px; /* space between save button and social buttons */
-			}
-			#saveContact {
-				width: auto;
-				height: 50px;
-				border-radius: 12px;
-				border: none;
-				padding: 7px;
-				background-color: rgba(255, 255, 255, 0.2);
-				backdrop-filter: blur(10px);
-				color: #fff;
-				font-weight: bold;
-				cursor: pointer;
-
-				transition: transform 0.2s, background-color 0.2s;
-			}
-			#saveContact:hover {
-				transform: scale(1.05);
-				background-color: rgba(255, 255, 255, 0.3);
+				gap: 10px;
 			}
 
-			/* Social buttons scrollable */
 			.socialButtonContainer {
 				display: flex;
 				flex-direction: row;
 				gap: 10px;
 				padding: 5px;
-				overflow-x: auto; /* horizontal scroll if buttons exceed container width */
-				-webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+				overflow-x: auto;
 			}
-			.socialButtonContainer::-webkit-scrollbar {
-				height: 6px;
-			}
-			.socialButtonContainer::-webkit-scrollbar-thumb {
-				background: rgba(255, 255, 255, 0.3);
-				border-radius: 3px;
-			}
-			.socialButtonContainer::-webkit-scrollbar-track {
-				background: transparent;
-			}
+
 			.socialButton {
 				width: 50px;
 				height: 50px;
 				border-radius: 12px;
 				background-color: rgba(255, 255, 255, 0.2);
-				backdrop-filter: blur(10px);
-				cursor: pointer;
 				padding: 5px;
+				cursor: pointer;
 				transition: transform 0.2s, background-color 0.2s;
 			}
 			.socialButton:hover {
@@ -157,149 +155,92 @@
 				background-color: rgba(255, 255, 255, 0.3);
 			}
 
-			/* Bio Container */
-			.bioContainer {
-				width: 90%;
-				max-width: 500px;
-				padding: 15px 15px;
-				margin-top: 10px;
-				border-radius: 16px;
-
-				line-height: 1.4;
-				text-align: left; /* align text like buttons and contacts */
-				display: flex;
-				flex-direction: column;
-				gap: 10px;
-			}
-			#bioData {
-				margin: 0;
-				font-size: 0.95rem;
-			}
-
-			/* Contact Container */
-			.contactContainer {
-				width: 90%;
-				max-width: 500px;
-
-				margin: 10px 0;
-				display: flex;
-				flex-direction: column;
-				gap: 12px;
-
-				backdrop-filter: blur(15px);
-			}
-			/* Contact Elements */
-			.contactElement {
-				display: flex;
-				align-items: center;
-				cursor: pointer;
-				gap: 12px;
+			#saveContact {
+				width: 100%;
+				max-width: 200px;
+				height: 50px;
+				border-radius: 12px;
+				border: none;
+				background-color: rgba(255, 255, 255, 0.2);
 				color: #fff;
-				border-radius: 16px;
-				border: 1px solid rgba(255, 255, 255, 0.3);
-				background-color: rgba(255, 255, 255, 0.25);
-				padding: 4px;
+				font-weight: bold;
+				cursor: pointer;
 				transition: transform 0.2s, background-color 0.2s;
 			}
-			.contactElement:hover {
-				background-color: rgba(255, 255, 255, 0.2);
-				scale: calc(1.02);
-				padding: 4px;
-				border-radius: 10px;
-				transition: background-color 0.2s;
-			}
-			.contactIcon {
-				width: 40px;
-				height: 40px;
-				flex-shrink: 0;
-			}
-			.contactDetails {
-				margin: 0;
-				word-break: break-word;
-				font-size: 0.95rem;
+			#saveContact:hover {
+				transform: scale(1.05);
+				background-color: rgba(255, 255, 255, 0.3);
 			}
 
-			/* Mobile layout */
 			@media (max-width: 480px) {
 				.profileContainer {
 					flex-direction: row;
-					text-align: start;
-					gap: 5px;
 				}
-
 				#profileImg {
-					width: 150px;
-					height: 150px;
-					border-radius: 16px 16px 0 0;
+					width: 120px;
+					height: 120px;
 				}
 			}
 		</style>
 	</head>
 	<body>
-		<!-- Camera background -->
 		<video id="cameraFeed" autoplay playsinline muted></video>
 		<div id="overlay"></div>
 
-		<!-- Profile Card -->
+		<!-- Unified container -->
+		<div class="mainContainer">
+			<div class="profileContainer glassCard">
+				<img id="profileImg" src="./img/profile.jpg" alt="Kawsar Hossain" />
+				<div class="personalDetails">
+					<h2>Kawsar Hossain</h2>
+					<h5>Meta Marketer</h5>
+					<h5>WeFlo LTD</h5>
+				</div>
+			</div>
 
-		<div class="profileContainer glassCard">
-			<img
-				id="profileImg"
-				src="./img/profile.jpg"
-				alt="Kawsar Hossain profile picture"
-			/>
-			<div class="personalDetails">
-				<h2 id="name">Kawsar Hossain</h2>
-				<h5 id="occupation">Meta Marketer</h5>
-				<h5 id="workPlace">WeFlo LTD</h5>
+			<div class="bioContainer glassCard">
+				<p>
+					Social Media Strategist ✨ | Turning clicks into conversions with
+					engaging content and targeted campaigns. 🎯 Let's build your brand's
+					online presence together. 🤝
+				</p>
+			</div>
+
+			<div class="contactContainer glassCard">
+				<div class="contactElement">
+					<img src="./icons/email.png" class="contactIcon" />
+					<p class="contactDetails">kawsarbapare50@gmail.com</p>
+				</div>
+				<div class="contactElement">
+					<img src="./icons/phone.png" class="contactIcon" />
+					<p class="contactDetails">+8801618893588</p>
+				</div>
+				<div class="contactElement">
+					<img src="./icons/whatsapp.png" class="contactIcon" />
+					<p class="contactDetails">wa.me/+8801618893588</p>
+				</div>
+				<div class="contactElement">
+					<img src="./icons/location.png" class="contactIcon" />
+					<p class="contactDetails">Dhaka, Bangladesh</p>
+				</div>
+			</div>
+
+			<div class="buttonContainer glassCard">
+				<div class="socialButtonContainer">
+					<img src="./icons/linkedin.png" class="socialButton" />
+					<img src="./icons/instagram.png" class="socialButton" />
+					<img src="./icons/facebook.png" class="socialButton" />
+					<img src="./icons/behance.png" class="socialButton" />
+				</div>
+				<button id="saveContact">Save Contact</button>
 			</div>
 		</div>
 
-		<!-- Bio Container -->
-		<div class="bioContainer glassCard">
-			<p id="bioData">
-				Social Media Strategist ✨ | Turning clicks into conversions with
-				engaging content and targeted campaigns. 🎯 Let's build your brand's
-				online presence together. 🤝
-			</p>
-		</div>
-
-		<!-- Contact Container -->
-		<div class="contactContainer">
-			<div class="contactElement">
-				<img src="./icons/email.png" alt="Email Me" class="contactIcon" />
-				<p class="contactDetails">kawsarbapare50@gmail.com</p>
-			</div>
-			<div class="contactElement">
-				<img src="./icons/phone.png" alt="Call Me" class="contactIcon" />
-				<p class="contactDetails">+8801618893588</p>
-			</div>
-			<div class="contactElement">
-				<img src="./icons/whatsapp.png" alt="whatsapp Me" class="contactIcon" />
-				<p class="contactDetails">wa.me/+8801618893588</p>
-			</div>
-			<div class="contactElement">
-				<img src="./icons/location.png" alt="Visit Me" class="contactIcon" />
-				<p class="contactDetails">Dhaka, Bangladesh</p>
-			</div>
-		</div>
-		<!-- Button Container -->
-		<div class="buttonContainer">
-			<div class="socialButtonContainer">
-				<img src="./icons/linkedin.png" alt="LinkedIn" class="socialButton" />
-				<img src="./icons/instagram.png" alt="Instagram" class="socialButton" />
-				<img src="./icons/facebook.png" alt="Facebook" class="socialButton" />
-				<img src="./icons/behance.png" alt="Website" class="socialButton" />
-			</div>
-			<img src="./icons/contact.png" alt="Save Contact" id="saveContact" />
-		</div>
 		<script>
 			const video = document.getElementById("cameraFeed");
 			navigator.mediaDevices
 				.getUserMedia({ video: { facingMode: "environment" } })
-				.then((stream) => {
-					video.srcObject = stream;
-				})
+				.then((stream) => (video.srcObject = stream))
 				.catch((err) => console.error("Camera access denied:", err));
 		</script>
 	</body>
